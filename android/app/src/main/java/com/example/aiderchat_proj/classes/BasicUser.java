@@ -12,7 +12,7 @@ public class BasicUser {
     Gender gender;
     String location;
     List<EnumChannel> channels;
-
+    //שדכשדכdsfdsf
     public BasicUser(){};
 
 
