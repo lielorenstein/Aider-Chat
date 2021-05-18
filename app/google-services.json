@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "581737851252",
+    "project_id": "rescuechat-39706",
+    "storage_bucket": "rescuechat-39706.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:581737851252:android:1bf6ab55b23ba372df6421",
+        "android_client_info": {
+          "package_name": "com.example.aiderchat_proj"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "581737851252-3khao5keurm2n6i8964u17vc051f8c3f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBq7wHaZU3XBA4ZNHo-1kh2YHISXyss_YE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "581737851252-3khao5keurm2n6i8964u17vc051f8c3f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:581737851252:android:0067e463e25c1cc6df6421",
+        "android_client_info": {
+          "package_name": "com.example.aiderchat_proj.ui"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "581737851252-3khao5keurm2n6i8964u17vc051f8c3f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBq7wHaZU3XBA4ZNHo-1kh2YHISXyss_YE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "581737851252-3khao5keurm2n6i8964u17vc051f8c3f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
