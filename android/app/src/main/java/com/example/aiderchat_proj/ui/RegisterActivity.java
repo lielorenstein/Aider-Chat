@@ -107,14 +107,10 @@ public class RegisterActivity extends AppCompatActivity {
         picker.show();
     }
 
-//    private void savePreferences() {
-//        String emailData = registerViewModel.form.getEmail().trim();
-//        String passwordData = registerViewModel.form.getPassword().trim();
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        editor.putString("Email", emailData);
-//        editor.putString("Pss", passwordData);
-//        editor.apply();
-//    }
+    public void onClickDone(View view){
+        //registerViewModel.form.setGender(mBinding.IdGenderSpinner.getSelectedItem().toString());
+        registerViewModel.done();
+    }
 
 
 }

@@ -2,11 +2,15 @@ package com.example.aiderchat_proj.utils;
 
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.InverseBindingAdapter;
+
+import com.example.aiderchat_proj.classes.BasicUser;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -76,5 +80,24 @@ public class BindingAdapters {
             return null;
         }
     }
+
+
+
+
+    @BindingAdapter("OnSelectedGenderChanged")
+    public static void setNewItem(Spinner spinner, BasicUser bu) {
+        AdapterView.OnItemSelectedListener onItemSelectedListener = new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    bu.setGender(BasicUser.Gender.valueOf(spinner.getSelectedItem().toString()));
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            };
+            spinner.setOnItemSelectedListener(onItemSelectedListener);
+        }
+
 
 }

@@ -24,6 +24,12 @@ public class RegisterViewModel extends ViewModel {
         repository = RegisterRepository.getInstance();
     }
 
+    public void done(){
+        if(form.isLocationValid(true)){
+            registerUser();
+        }
+    }
+
     public void addUser(){
         form.getUser().setId(repository.addUser(form.getUser()));
     }
