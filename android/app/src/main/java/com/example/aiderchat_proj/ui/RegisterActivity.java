@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,13 +24,17 @@ import com.example.aiderchat_proj.R;
 import com.example.aiderchat_proj.classes.BasicUser;
 import com.example.aiderchat_proj.databinding.ActivityRegisterBinding;
 import com.example.aiderchat_proj.utils.ViewModelFactory;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.io.IOException;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
 
 public class RegisterActivity extends AppCompatActivity {
     private RegisterViewModel registerViewModel;
@@ -108,8 +114,54 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void onClickDone(View view){
-        //registerViewModel.form.setGender(mBinding.IdGenderSpinner.getSelectedItem().toString());
-        registerViewModel.done();
+        //if(isLocationValid(true))
+            registerViewModel.registerUser();
+    }
+
+
+
+
+
+    public boolean isLocationValid(boolean setMsg){
+        String stringAddress = registerViewModel.form.getUser().getLocation();
+        if(stringAddress == null || stringAddress.equals(""))
+            return false;
+        Geocoder geocoder = new Geocoder(getBaseContext());
+        List<Address> addresses = null;
+        try {
+            // Getting a maximum of 3 Address that matches the input
+            // text
+            addresses = geocoder.getFromLocationName(stringAddress, 3);
+            if (addresses != null && !addresses.equals(""))
+                search(addresses);
+            return true;
+        } catch (Exception e) {
+            if (setMsg)
+                registerViewModel.form.locationError.set(R.string.date_format_not_valid);
+            return false;
+        }
+    }
+
+    protected void search(List<Address> addresses) {
+        Address address = addresses.get(0);
+        LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+        registerViewModel.form.setLocation(getPlace(latLng));
+    }
+
+    public String getPlace(LatLng latLng) {
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        List<Address> addresses = null;
+        try {
+            addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+            if (addresses.size() > 0) {
+                return addresses.get(0).getAddressLine(0);
+            }
+            return "unknown place: \n (" + latLng.latitude + ", " + latLng.longitude + ")";
+        } catch (
+                IOException e) {
+            e.printStackTrace();
+        }
+        return "IOException ...";
     }
 
 

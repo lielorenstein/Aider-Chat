@@ -1,7 +1,9 @@
 package com.example.aiderchat_proj.classes;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class BasicUser {
     String id;
@@ -11,14 +13,14 @@ public class BasicUser {
     String emailAddress;
     Gender gender;
     String location;
-    List<EnumChannel> channels;
+    Set<EnumChannel> channels = new HashSet<>();
 
     public BasicUser(){};
 
 
     public BasicUser(String id, String firstName, String lastName, Date birthDate,
                      String emailAddress, Gender gender, String location,
-                     List<EnumChannel> channels){
+                     Set<EnumChannel> channels){
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -85,17 +87,17 @@ public class BasicUser {
         this.location = location;
     }
 
-    public List<EnumChannel> getChannels() {
+    public Set<EnumChannel> getChannels() {
         return channels;
     }
 
-    public void setChannels(List<EnumChannel> channels) {
+    public void setChannels(Set<EnumChannel> channels) {
         this.channels = channels;
     }
 
 
     public enum Gender {
-        mail(0), female(1), other(2);
+        male(0), female(1), other(2);
         private final Integer code;
         Gender(Integer value) {
             this.code = value;

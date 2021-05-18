@@ -9,7 +9,7 @@
             type="com.example.aiderchat_proj.ui.RegisterViewModel" />
     </data>
 
-    <ScrollView
+    <FrameLayout
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:padding="5dp"
@@ -175,5 +175,5 @@
                  </LinearLayout>
             </RelativeLayout>
         </LinearLayout>
-    </ScrollView>
+    </FrameLayout>
 </layout>
