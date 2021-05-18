@@ -1,0 +1,39 @@
+<div class="main-div">
+
+
+      <mat-card-title>{{currentChannel.name}} Channel</mat-card-title>
+      <hr />
+
+      <div class="message-item" *ngFor="let item of currentChannel.messages">
+        <div><span>{{item['sender']}}</span>: {{item['text']}}</div>
+      </div>
+
+
+
+      <div class="form-wrapper">
+        <hr />
+        <form [formGroup]="chatForm" (ngSubmit)="onSend()">
+        <mat-form-field class="example-full-width">
+          <mat-label>Message</mat-label>
+          <!-- <textarea matInput type="text" autocomplete="off" size="40" formControlName="userMessage"> </textarea> -->
+          <textarea matInput
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="5"
+            formControlName="userMessage"
+            ></textarea>
+        </mat-form-field>
+
+
+        <button style="float: right;" mat-raised-button type="button" (click)="onClose()">Close Channel</button>
+        <button style="float: right;" mat-raised-button [disabled]="chatForm.invalid" type="submit">Send</button>
+      </form>
+    </div>
+
+
+
+
+
+  </div>
+
