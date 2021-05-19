@@ -13,6 +13,7 @@ import androidx.databinding.ObservableField;
 import com.example.aiderchat_proj.BR;
 import com.example.aiderchat_proj.R;
 import com.example.aiderchat_proj.classes.BasicUser;
+import com.example.aiderchat_proj.databinding.ActivityRegisterBinding;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.IOException;
@@ -26,7 +27,6 @@ import java.util.regex.Pattern;
 
 public class FormRegister extends BaseObservable {
     private Context baseContext;
-    private BasicUser.Gender gender;
     private String password;
     public boolean kids = false, girls = false, oldPpl = false;
     LatLng latLng;
@@ -45,10 +45,7 @@ public class FormRegister extends BaseObservable {
         return user;
     }
 
-    public boolean UserDone(){
-        boolean locationValid = isLocationValid(true);
-        return locationValid;
-    }
+
 
     @Bindable
     public boolean isValid() {
@@ -221,18 +218,30 @@ public class FormRegister extends BaseObservable {
     public void checkboxSwitchKids()
     {
         kids = !kids;
+        if(kids)
+            user.getChannels().add(BasicUser.EnumChannel.kid);
+        else
+            user.getChannels().remove(BasicUser.EnumChannel.kid);
         notifyPropertyChanged(BR.valid);
     }
 
     public void checkboxSwitchGirls()
     {
         girls = !girls;
+        if(girls)
+            user.getChannels().add(BasicUser.EnumChannel.girl);
+        else
+            user.getChannels().remove(BasicUser.EnumChannel.girl);
         notifyPropertyChanged(BR.valid);
     }
 
     public void checkboxSwitchOldPpl()
     {
         oldPpl = !oldPpl;
+        if(oldPpl)
+            user.getChannels().add(BasicUser.EnumChannel.old_man);
+        else
+            user.getChannels().remove(BasicUser.EnumChannel.old_man);
         notifyPropertyChanged(BR.valid);
     }
 

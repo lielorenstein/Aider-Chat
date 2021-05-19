@@ -1,8 +1,6 @@
 package com.example.aiderchat_proj.ui;
 
-import android.app.Application;
 import android.content.Context;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
