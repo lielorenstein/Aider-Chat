@@ -77,6 +77,7 @@ this.activatedRoute.params.subscribe(x => {
       var channelCommand: ChannelCommand = {
         channelIdentifier:this.channelIdentifer,
         sender: this.userName,
+        senderIdentifier: 'drysdgsdgsd',
         commandType: ChannelCommandType.MESSAGE,
          text: message.userMessage,
          id: '1',
@@ -93,6 +94,7 @@ this.activatedRoute.params.subscribe(x => {
     var channelCommand: ChannelCommand = {
       channelIdentifier:this.channelIdentifer,
       sender: this.userName,
+      senderIdentifier: 'asfaw5aasfs',
       commandType: ChannelCommandType.CLOSE_CHANNEL,
        text: "",
        id: '1',
