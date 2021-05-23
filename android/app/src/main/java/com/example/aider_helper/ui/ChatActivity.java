@@ -340,10 +340,16 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onItemClick(View view, int position) {
         String e = messages.get(position).getSender();
+        MessageBox messageBox = messages.get(position);
         if(e.equals("You")){
             e = theEntry;
         }
-        textToVoice.playVoice(messages.get(position).getContent(),
+        if(messageBox.getVoiceURL()==null){
+            messages.get(position)
+                    .setVoiceURL(textToVoice.getVoiceURL_FromAWS(messageBox.getContent(),
+                                 textToVoice.getVoice(listNames.indexOf(e))));
+        }
+        textToVoice.playVoice(messages.get(position),
                 textToVoice.getVoice(listNames.indexOf(e)));
     }
 

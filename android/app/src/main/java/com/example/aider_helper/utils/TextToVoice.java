@@ -15,6 +15,7 @@ import com.amazonaws.services.polly.model.DescribeVoicesResult;
 import com.amazonaws.services.polly.model.OutputFormat;
 import com.amazonaws.services.polly.model.SynthesizeSpeechPresignRequest;
 import com.amazonaws.services.polly.model.Voice;
+import com.example.aider_helper.classes.MessageBox;
 
 import java.io.IOException;
 import java.net.URL;
@@ -107,9 +108,10 @@ public class TextToVoice {
         });
     }
 
-    public void playVoice(String textToRead, Voice voice) {
-        if(voice == null || textToRead.equals("") || textToRead == null)
-            return;
+
+
+
+    public String getVoiceURL_FromAWS(String textToRead, Voice voice){
         // Create speech synthesis request.
         SynthesizeSpeechPresignRequest synthesizeSpeechPresignRequest =
                 new SynthesizeSpeechPresignRequest()
@@ -123,8 +125,14 @@ public class TextToVoice {
         // Get the presigned URL for synthesized speech audio stream.
         URL presignedSynthesizeSpeechUrl =
                 client.getPresignedSynthesizeSpeechUrl(synthesizeSpeechPresignRequest);
+        return presignedSynthesizeSpeechUrl.toString();
+    }
 
 
+
+    public void playVoice(String textToRead, Voice voice) {
+        if(voice == null || textToRead.equals("") || textToRead == null)
+            return;
         // Create a media player to play the synthesized audio stream.
         if (mediaPlayer.isPlaying()) {
             setupNewMediaPlayer();
@@ -133,7 +141,7 @@ public class TextToVoice {
         try {
             // Set media player's data source to previously obtained URL.
             mediaPlayer.reset();
-            mediaPlayer.setDataSource(presignedSynthesizeSpeechUrl.toString());
+            mediaPlayer.setDataSource(getVoiceURL_FromAWS(textToRead,voice));
         } catch (IOException e) {
             Log.e("TAG-ERROR", "Unable to set data source for the media player! " + e.getMessage());
             return;
@@ -142,4 +150,28 @@ public class TextToVoice {
         // Start the playback asynchronously (since the data source is a network stream).
         mediaPlayer.prepareAsync();
     }
+
+
+    public void playVoice(MessageBox messageBox, Voice voice) {
+        if(voice == null || messageBox.getContent().equals("") || messageBox.getContent() == null)
+            return;
+        // Create a media player to play the synthesized audio stream.
+        if (mediaPlayer.isPlaying()) {
+            setupNewMediaPlayer();
+        }
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        try {
+            // Set media player's data source to previously obtained URL.
+            mediaPlayer.reset();
+            mediaPlayer.setDataSource(messageBox.getVoiceURL());
+        } catch (IOException e) {
+            Log.e("TAG-ERROR", "Unable to set data source for the media player! " + e.getMessage());
+            return;
+        }
+
+        // Start the playback asynchronously (since the data source is a network stream).
+        mediaPlayer.prepareAsync();
+    }
+
+
 }

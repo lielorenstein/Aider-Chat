@@ -5,7 +5,6 @@ public class MessageBox {
     private String content;
     private String timeDate;
     private boolean id;
-
     private String voiceURL;
 
     public MessageBox(String sender, String context, String timeDate){
