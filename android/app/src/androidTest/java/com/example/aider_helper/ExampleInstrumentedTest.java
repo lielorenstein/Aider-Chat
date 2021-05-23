@@ -1,4 +1,4 @@
-package com.example.aiderchat_proj;
+package com.example.aider_helper;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.example.mychat_example", appContext.getPackageName());
+        assertEquals("com.example.aider_helper", appContext.getPackageName());
     }
 }

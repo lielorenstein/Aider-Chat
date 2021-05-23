@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.MainActivity">
+
+    <data>
+        <variable
+            name="active_subscriber"
+            type="java.lang.Boolean" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+
+        >
+
+        <TextView
+            android:id="@+id/IdTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="#00FFFFFF"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center"
+            android:padding="20sp"
+            android:text="Welcome to Aider Chat!"
+            android:textColor="#248BF5"
+            android:textSize="50sp"
+            app:drawableTint="#FFFFFF"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_hackathon"
+            android:layout_margin="90sp"/>
+
+        <LinearLayout
+
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+            <Button
+                android:id="@+id/IdAvailableHelpButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bubble_button"
+                android:onClick="onReadyToHelpClick"
+                android:text="Available to help"
+                android:textAllCaps="false"
+                android:textSize="20sp"/>
+            <Button
+                android:id="@+id/IdHelpMeButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="30dp"
+                android:background="@drawable/bubble_button"
+                android:onClick="onHelpMeClick"
+                android:text="Help me"
+                android:textSize="50sp" />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</layout>

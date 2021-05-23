@@ -2,10 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.ChannelActivity">
+    tools:context=".ui.ChatActivity">
 
     <data>
-
+        <variable
+            name="fontSize"
+            type="com.example.aider_helper.utils.FontSizeUtils" />
     </data>
 
     <RelativeLayout
@@ -14,15 +16,38 @@
         android:padding="24dp"
         android:orientation="horizontal">
 
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_chat"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/entry_layout_text"
+            android:layout_above="@id/IdFontSizeButtons"
             android:layout_alignParentTop="true"
             tools:listitem="@layout/recyclerview_message"/>
 
-
+        <LinearLayout
+            android:id="@+id/IdFontSizeButtons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_above="@id/entry_layout_text">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onFontIncrease"
+                android:backgroundTint="#BFBFBF"
+                android:text="+"
+                android:textSize="30sp"/>
+            <Button
+                android:layout_alignParentBottom="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onFontDecrease"
+                android:backgroundTint="#BFBFBF"
+                android:text="-"
+                android:textSize="30sp"/>
+        </LinearLayout>
         <TextView
             android:id="@+id/notification_number_unread_bubble"
             android:layout_width="wrap_content"
@@ -80,5 +105,23 @@
 
                 android:background="@drawable/ic_baseline_send_24" />
         </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/LayoutNotifier"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/bg_110"
+            android:onClick="LayoutOnClick">
+            <TextView
+                android:id="@+id/textNotifier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="40sp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:text="Please wait for another host"
+                />
+        </RelativeLayout>
     </RelativeLayout>
 </layout>

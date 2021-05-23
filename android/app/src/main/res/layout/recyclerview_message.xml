@@ -4,17 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools">
         <data>
             <import type="android.view.Gravity" />
+
+            <variable
+                name="fontSize"
+                type="com.example.aider_helper.utils.FontSizeUtils" />
             <variable
               name="messageBox"
-              type="com.example.aiderchat_proj.classes.MessageBox" />
+              type="com.example.aider_helper.classes.MessageBox" />
         </data>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="@{messageBox.id? Gravity.START : Gravity.END}">
-
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -26,7 +28,7 @@
                     android:text="@{messageBox.id? messageBox.sender : messageBox.timeDate}"
                     android:padding="4dp"
                     app:layout_constraintWidth_percent="0.8"
-                    android:textSize="@{messageBox.id? 15 : 12}"
+                    android:textSize="@{messageBox.id? 15+fontSize.size : 12+fontSize.size}"
                     />
                 <TextView
                     android:id="@+id/postDate"
@@ -36,7 +38,8 @@
                     app:layout_constraintWidth_percent="0.8"
                     android:padding="4dp"
                     android:textAlignment="textEnd"
-                    android:textSize="@{messageBox.id? 12 : 15}" />
+                    android:textSize="@{messageBox.id? 12+fontSize.size : 15+fontSize.size}"
+                    android:gravity="end" />
             </LinearLayout>
 
             <TextView
@@ -54,8 +57,8 @@
                 app:layout_constraintWidth_max="wrap"
                 app:layout_constraintWidth_percent="0.8"
                 android:background="@{messageBox.id? @drawable/shape_bg_incoming_bubble : @drawable/shape_bg_outgoing_bubble}"
-                android:textColor="@color/white"
-                android:textSize="13.5sp"
+                android:textColor="@{messageBox.id? @color/white : @color/black}"
+                android:textSize="@{14+fontSize.size}"
                 android:paddingStart="@{messageBox.id? @dimen/padding_20 : @dimen/padding_10}"
                 android:paddingEnd="@{messageBox.id? @dimen/padding_10 : @dimen/padding_20}" />
 
