@@ -41,26 +41,31 @@
                     android:textSize="@{messageBox.id? 12+fontSize.size : 15+fontSize.size}"
                     android:gravity="end" />
             </LinearLayout>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@{messageBox.id? @drawable/shape_shadow_left : @drawable/shape_shadow_right}">
+    <TextView
+        android:id="@+id/messageBox"
+        android:text="@{messageBox.content}"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="2dp"
+        android:paddingLeft="@{messageBox.id? @dimen/padding_20 : @dimen/padding_10}"
+        android:paddingTop="8dp"
+        android:paddingRight="@{messageBox.id? @dimen/padding_10 : @dimen/padding_null}"
+        android:paddingBottom="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_max="wrap"
+        app:layout_constraintWidth_percent="0.8"
+        android:background="@{messageBox.id? @drawable/shape_bg_incoming_bubble : @drawable/shape_bg_outgoing_bubble}"
+        android:textColor="@{messageBox.id? @color/white : @color/black}"
+        android:textSize="@{14+fontSize.size}"
+        android:paddingStart="@{messageBox.id? @dimen/padding_20 : @dimen/padding_10}"
+        android:paddingEnd="@{messageBox.id? @dimen/padding_10 : @dimen/padding_20}" />
 
-            <TextView
-                android:id="@+id/messageBox"
-                android:text="@{messageBox.content}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:lineSpacingExtra="2dp"
-                android:paddingLeft="@{messageBox.id? @dimen/padding_20 : @dimen/padding_10}"
-                android:paddingTop="8dp"
-                android:paddingRight="@{messageBox.id? @dimen/padding_10 : @dimen/padding_null}"
-                android:paddingBottom="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_max="wrap"
-                app:layout_constraintWidth_percent="0.8"
-                android:background="@{messageBox.id? @drawable/shape_bg_incoming_bubble : @drawable/shape_bg_outgoing_bubble}"
-                android:textColor="@{messageBox.id? @color/white : @color/black}"
-                android:textSize="@{14+fontSize.size}"
-                android:paddingStart="@{messageBox.id? @dimen/padding_20 : @dimen/padding_10}"
-                android:paddingEnd="@{messageBox.id? @dimen/padding_10 : @dimen/padding_20}" />
+</LinearLayout>
 
 
         </LinearLayout>
