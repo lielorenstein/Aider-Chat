@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.aider_helper">
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    package="com.example.aiderchat_proj">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <application
         android:allowBackup="true"
-        android:icon="@drawable/icon_hackathon"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/icon_hackathon"
+        android:roundIcon="@mipmap/ic_launcher_round"
+
         android:supportsRtl="false"
-        android:theme="@style/Theme.AiderHelper">
-        <activity android:name=".ui.ChatActivity"></activity>
-        <activity android:name=".ui.ListenerActivity" />
-        <activity android:name=".ui.MainActivity">
+        android:theme="@style/Theme.MyChat_example">
+        <activity android:name=".ui.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.RegisterActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".ui.ChannelActivity"
+            android:label="@string/app_name" />
     </application>
 
 </manifest>

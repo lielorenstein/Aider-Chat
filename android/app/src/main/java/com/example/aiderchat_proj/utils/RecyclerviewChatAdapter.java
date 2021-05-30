@@ -1,4 +1,4 @@
-package com.example.aider_helper.utils;
+package com.example.aiderchat_proj.utils;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,8 +8,8 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.aider_helper.classes.MessageBox;
-import com.example.aider_helper.databinding.RecyclerviewMessageBinding;
+import com.example.aiderchat_proj.classes.MessageBox;
+import com.example.aiderchat_proj.databinding.RecyclerviewMessageBinding;
 
 import java.util.List;
 
@@ -38,14 +38,15 @@ public class RecyclerviewChatAdapter extends RecyclerView.Adapter<RecyclerviewCh
     public void onBindViewHolder(ViewHolder holder, int position) {
         MessageBox messageBox = messages.get(position);
         holder.rvMessageBinding.setMessageBox(messageBox);
-        holder.rvMessageBinding.setFontSize(FontSizeUtils.getInstance());
         holder.rvMessageBinding.executePendingBindings();
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mClickListener != null) mClickListener.onItemClick(v, position);
-            }
-        });
+//        View view1 = holder.rvMessageBinding.messageBoxLL.getChildAt(0);
+//        View view2 = holder.rvMessageBinding.messageBoxLL.getChildAt(1);
+//        if(!messageBox.getId()){
+//            holder.rvMessageBinding.messageBoxLL.removeAllViews();
+//            holder.rvMessageBinding.messageBoxLL.addView(view2);
+//            holder.rvMessageBinding.messageBoxLL.addView(view1);
+//        }
+
     }
 
     // total number of rows
@@ -57,7 +58,9 @@ public class RecyclerviewChatAdapter extends RecyclerView.Adapter<RecyclerviewCh
 
     // view holder is the item of the recyclerview
     // stores and recycles views as they are scrolled off screen
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+//        TextView nickname;
+//        TextView content;
         RecyclerviewMessageBinding rvMessageBinding;
 
         ViewHolder(@NonNull RecyclerviewMessageBinding binding) {
@@ -65,7 +68,10 @@ public class RecyclerviewChatAdapter extends RecyclerView.Adapter<RecyclerviewCh
             rvMessageBinding = binding;
         }
 
-
+        @Override
+        public void onClick(View view) {
+            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+        }
 
         @Override
         public boolean onLongClick(View view) {
@@ -99,5 +105,26 @@ public class RecyclerviewChatAdapter extends RecyclerView.Adapter<RecyclerviewCh
 
     public interface ItemLongClickListener{
         void onItemLongClick(View view, int position);
+    }
+
+    public void ReorderText(View view)
+    {
+        LinearLayout myLinearLayout = (LinearLayout) view;
+        int childcount = myLinearLayout.getChildCount();
+        // create array
+        View[] children = new View[childcount];
+
+        // get children of linearlayout
+        for (int i=0; i < childcount; i++){
+            children[i] = myLinearLayout.getChildAt(i);
+        }
+
+        //now remove all children
+        myLinearLayout.removeAllViews();
+
+        //and resort, first position
+        myLinearLayout.addView(children[1]);
+        //second position
+        myLinearLayout.addView(children[0]);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.aider_helper;
+package com.example.aiderchat_proj;
 
 import org.junit.Test;
 

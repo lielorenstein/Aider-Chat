@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.view.View" />
+        <import type="com.example.aiderchat_proj.classes.BasicUser" />
+        <variable
+            name="registerViewModel"
+            type="com.example.aiderchat_proj.ui.RegisterViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:padding="5dp"
+        android:background="#235F8E">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_110">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:layout_margin="@dimen/padding_20">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="please fill all the missing fields"
+                        android:textColor="@color/white"
+                        android:layout_margin="@dimen/padding_10"/>
+                    <EditText
+                        android:layout_marginTop="7dp"
+                        android:id="@+id/name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="First Name"
+                        android:text="@={registerViewModel.form.firstName}"
+                        android:background="@color/white"
+                        android:padding="5dp"/>
+                    <EditText
+                        android:layout_marginTop="7dp"
+                        android:id="@+id/lastName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Last Name"
+                        android:text="@={registerViewModel.form.lastName}"
+                        android:background="@color/white"
+                        android:padding="5dp"
+                        />
+                    <LinearLayout
+                        android:layout_marginTop="7dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Gender:"
+                            android:textSize="18sp"
+                            android:padding="5dp"/>
+                        <Spinner
+                            android:id="@+id/IdGenderSpinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:entries="@{registerViewModel.form.genders}"
+                            android:padding="5dp"
+                            app:OnSelectedGenderChanged="@{registerViewModel.form.user}"
+                            android:background="@color/white"/>
+                    </LinearLayout>
+                    <EditText
+                        android:layout_marginTop="7dp"
+                        android:id="@+id/IdClientEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Email Address"
+                        android:inputType="textEmailAddress"
+                        android:text="@={registerViewModel.form.email}"
+                        app:ValidationOnFocus="@{registerViewModel.form::isEmailValid}"
+                        app:error="@{registerViewModel.form.emailError}"
+                        android:background="@color/white"
+                        android:padding="5dp"
+                        />
+
+                    <EditText
+                        android:layout_marginTop="7dp"
+                        android:id="@+id/IdPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Password"
+                        android:inputType="textPassword"
+                        android:text="@={registerViewModel.form.password}"
+                        app:ValidationOnFocus="@{registerViewModel.form::isPasswordValid}"
+                        app:error="@{registerViewModel.form.passwordError}"
+                        android:background="@color/white"
+                        android:padding="5dp"/>
+
+                    <TextView
+                        android:layout_marginTop="7dp"
+                        android:id="@+id/IdBirthDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Select Birth Date"
+                        android:inputType="date"
+                        android:text="@={registerViewModel.form.birthDate}"
+                        app:errorText="@{registerViewModel.form.dateError}"
+                        android:background="@color/white"
+                        android:onClick="onClickPickDate"
+                        android:textSize="18sp"
+                        android:padding="5dp"/>
+                    <EditText
+                        android:layout_marginTop="7dp"
+                        android:id="@+id/IdLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:hint="Location"
+                        android:text="@={registerViewModel.form.location}"
+                        app:error="@{registerViewModel.form.locationError}"
+                        android:background="@color/white"
+                        android:padding="5dp"/>
+
+                    <LinearLayout
+                        android:layout_marginTop="7dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Channels:"
+                            android:textSize="18sp"
+                            />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Kids"
+                                android:textColor="@color/common_google_signin_btn_text_light_focused"
+                                android:onClick="@{() -> registerViewModel.form.checkboxSwitchKids()}"/>
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Girls"
+                                android:textColor="@color/common_google_signin_btn_text_light_focused"
+                                android:onClick="@{() -> registerViewModel.form.checkboxSwitchGirls()}"/>
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Old-people"
+                                android:textColor="@color/common_google_signin_btn_text_light_focused"
+                                android:onClick="@{() -> registerViewModel.form.checkboxSwitchOldPpl()}"/>
+
+                        </LinearLayout>
+                    </LinearLayout>
+                    <Button
+                        android:id="@+id/btn_email_sign_in"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/padding_10"
+                        android:background="@drawable/bubble_button"
+                        android:enabled="@{registerViewModel.form.valid}"
+                        android:onClick="onClickDone"
+                        android:text="Done"/>
+                 </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </FrameLayout>
+</layout>
