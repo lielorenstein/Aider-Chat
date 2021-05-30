@@ -8,18 +8,23 @@ export enum ChannelCommandType{
 
 export interface ChannelCommand{
   channelIdentifier?: string;
-  commandType: ChannelCommandType;
-  sender: string;
   senderIdentifier?: string;
-  text: string;
+  
+  
+  commandType?: ChannelCommandType;
+  typeCommand: "message" | "getOut" | "logIn"
+  sender: string;
   id: string;
-  date: Date;
+  text: string;
+  date?: Date;
 }
 
 export interface Channel{
   name: string;
   identifier: string;
   annoymus: boolean;
+  id: string;
+  users?: Set<string>,
   type: ChannelType[];
   messages?: ChannelCommand[];
   unreadMessages?: number;

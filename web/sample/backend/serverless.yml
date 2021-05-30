@@ -1,0 +1,35 @@
+service: talking-backend 
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: us-east-1 
+  role: arn:aws:iam::591033207371:role/my-talking-aider-actual-app
+      
+functions:
+  speak:
+    handler: handler.speak
+    events:
+      - http: 
+          path: speak
+          method: post
+          cors: true
+
+# org: matan1346
+# app: backend
+# service: backend
+
+# frameworkVersion: '2'
+
+
+# provider:
+#   name: aws
+#   runtime: nodejs12.x
+#   lambdaHashingVersion: '20201221'
+
+# functions:
+#   hello:
+#     handler: handler.hello
+#     events:
+#       - http:
+#           path: /
+#           method: get

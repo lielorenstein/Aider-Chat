@@ -1,7 +1,7 @@
 
 
 <div class="channels-list">
-  <mat-card class="channel-item"  *ngFor="let channel of channels; let i = index" [value]="channel.name" (click)="openChannel(i)">
+  <mat-card class="channel-item"  *ngFor="let channel of waitingChannels; let i = index" [value]="channel.name" (click)="openChannel(i)">
 
       <div>
         <span [matBadge]="channel.unreadMessages" MatBadgePosition="below before"   matBadgeOverlap="false">{{channel.name}}</span>
@@ -9,6 +9,7 @@
       <!-- <span *ngIf="!channel.unreadMessages || channel.unreadMessages <= 0">{{channel.name}}</span> -->
 
   </mat-card>
+  <mat-card *ngIf="waitingChannels.length <= 0">No Channels</mat-card>
 
 </div>
 

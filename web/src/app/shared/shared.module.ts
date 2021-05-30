@@ -6,6 +6,7 @@ import { MaterialModule } from '../core/modules/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ChannelsListComponent } from './channels-list/channels-list.component';
 import { HomeComponent } from './home/home.component';
+import { HttpClient } from '@angular/common/http';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { HomeComponent } from './home/home.component';
   imports: [
     CommonModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
     // MatFormFieldModule,
     // MatInputModule,
     // MatCardModule,

@@ -11,7 +11,7 @@ import { ChannelsService } from 'src/app/core/services/channels.service';
 })
 export class ChannelsListComponent implements OnInit {
 
-  channels: Channel[];
+  waitingChannels: Channel[];
 
   constructor(
     private channelsService: ChannelsService,
@@ -19,8 +19,8 @@ export class ChannelsListComponent implements OnInit {
 
   ngOnInit(): void {
 
-  this.channelsService.getChannels().subscribe(ch => {
-      this.channels = ch;
+  this.channelsService.getWaitingChannels().subscribe(ch => {
+      this.waitingChannels = ch;
   });
 
 
@@ -28,7 +28,7 @@ export class ChannelsListComponent implements OnInit {
 
 
 openChannel(index: number): void{
-  this.router.navigate(['channel', this.channels[index].identifier]);
+  this.router.navigate(['channel', this.waitingChannels[index].identifier]);
 }
 
 }

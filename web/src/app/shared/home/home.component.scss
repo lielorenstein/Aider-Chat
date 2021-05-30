@@ -1,5 +1,36 @@
 
 .wrapper
 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
+  
+
+  
 }
+
+button
+  {
+    margin: 12px;;
+    width: 800px;
+    height: 500px;
+    font-size: 40pt;
+  }
+
+
+  .help-to
+  {
+    background-color: rgb(23, 127, 245);
+
+  }
+
+  .help-me
+  {
+    background-color: #1bda1b;
+    
+  }
+
+  .material-icons{
+   font-size: 170px;
+  }

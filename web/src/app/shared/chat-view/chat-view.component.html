@@ -3,12 +3,25 @@
 
       <mat-card-title>{{currentChannel.name}} Channel</mat-card-title>
       <hr />
+      <div class="imessage">
 
+      
       <div class="message-item" *ngFor="let item of currentChannel.messages">
-        <div><span>{{item['sender']}}</span>: {{item['text']}}</div>
+        <!-- <div><span>{{item['sender']}}</span>: {{item['text']}}</div> -->
+        <p *ngIf="item['senderIdentifier'] == channelsService.userID" class="from-me margin-r_one" ><span [matTooltip]="item['date']"
+          matTooltipPosition="right">{{item['text']}}</span></p>
+          <p *ngIf="item['senderIdentifier'] != channelsService.userID" class="from-them" ><span [matTooltip]="item['date']"
+            matTooltipPosition="right"
+            >{{item['text']}}</span></p>
       </div>
-
-
+    </div>
+      <!-- <div class="imessage">
+        <p class="from-them">It was loud. We just laid there and said &ldquo;is this an earthquake? I think this is an earthquake.&rdquo;</p>
+        <p class="from-me">Like is this an earthquake just go back to sleep</p>
+        <p class="from-them margin-b_one">It&rsquo;s more like &ldquo;this is an earthquake. Check the Internet. Yup. Earthquake. This is the size. This is the epicenter. Check social media. Make sure the East Coast knows I&rsquo;m alive. Okay, try and go back to sleep.&rdquo;</p>
+        <p class="from-me no-tail emoji">👍🏻</p>
+        <p class="from-me">Glad you&rsquo;re safe</p>
+      </div> -->
 
       <div class="form-wrapper">
         <hr />
@@ -26,14 +39,27 @@
         </mat-form-field>
 
 
-        <button style="float: right;" mat-raised-button type="button" (click)="onClose()">Close Channel</button>
+        <button *ngIf="channelIdentifer == channelsService.userID" style="float: right;" mat-raised-button type="button" (click)="onClose()">Close Channel</button>
         <button style="float: right;" mat-raised-button [disabled]="chatForm.invalid" type="submit">Send</button>
       </form>
     </div>
 
-
-
-
+<!-- <form [formGroup]="speakForm" (ngSubmit)="speakNow()">
+    <div style="margin: auto; padding: 10px; text-align: center;">
+      <h2>My Talking App</h2>
+      <div>
+        <textarea formControlName="textToSpeak" style="font-size: 15px; padding: 10px;" cols="60" rows="10"></textarea>
+      </div>
+      <div>
+        <select formControlName="selectVoices">
+          <option *ngFor="let voice of voices" [value]="voice">{{voice}}</option>
+        </select>
+      </div>
+      <div style="margin-top: 10px">
+        <button style="font-size: 15px;" type="submit">Speak Now</button>
+      </div>
+    </div>
+  </form> -->
 
   </div>
 

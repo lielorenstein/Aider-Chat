@@ -7,6 +7,7 @@ import { Channel, ChannelCommand, ChannelCommandType, ChannelType } from 'src/ap
 import { ChannelsService } from 'src/app/core/services/channels.service';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { APIService } from 'src/app/core/services/api.service';
 
 
 @Component({
@@ -21,14 +22,21 @@ export class ChatViewComponent implements OnInit {
   channelIdentifer: string;
   userName: string = "Matan";
   chatForm: FormGroup;
+  speakForm: FormGroup;
 
   currentChannel: Channel;
   userMessage: string;
 
-  constructor(private channelsService: ChannelsService,
+  voices = ["Matthew", "Joanna", "Ivy", "Justin"];
+  selectedVoice = "Mattew";
+textSpeak: string;
+isAllowed: boolean = false;
+
+  constructor(public channelsService: ChannelsService,
               private activatedRoute: ActivatedRoute,
               private router: Router,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private api: APIService) {
 
   }
 
@@ -38,17 +46,33 @@ export class ChatViewComponent implements OnInit {
 this.activatedRoute.params.subscribe(x => {
   if(!x.hasOwnProperty('channel_identifier'))
     this.router.navigate(['home']);
+
   this.channelIdentifer = x['channel_identifier'];
-  this.channelsService.addListeningChannel({type: [ChannelType.User], identifier: this.channelIdentifer,annoymus: false,name: this.channelIdentifer});
+
+  // if(!this.channelsService.isWaitingChannelExists(this.channelIdentifer) && !this.isAllowed)
+  //   this.router.navigate(['home']);
+
+
+    
+  this.channelsService.removeWaitingChannel(this.channelIdentifer);
+  this.channelsService.addListeningChannel({type: [ChannelType.User], id:  this.channelIdentifer, identifier: this.channelIdentifer,annoymus: false,name: this.channelIdentifer});
+  
+  //let command: ChannelCommand = {id: ''};
+  //this.channelsService.createChannel({type: [ChannelType.User], id:  this.channelIdentifer, identifier: this.channelIdentifer,annoymus: false,name: this.channelIdentifer});
 });
 
     this.chatForm = this.formBuilder.group({
       userMessage:[this.userMessage, [Validators.required]]
     });
 
+    this.speakForm = this.formBuilder.group({
+      selectVoices: [this.selectedVoice],
+      textToSpeak: [this.textSpeak]
+    });
 
     this.channelsService.getChannels().subscribe(x => {
-      let index = x.findIndex(c => c.identifier == this.channelIdentifer);
+      console.log(x);
+      let index = x.findIndex(c => c.id == this.channelIdentifer);
       if(index >= 0){
         this.currentChannel = x[index];
 
@@ -57,14 +81,30 @@ this.activatedRoute.params.subscribe(x => {
       else
       {
         // no longer belongs to this channel -> navigate to home
-        this.router.navigate(['home']);
         console.log("unsibscribe!");
+        this.router.navigate(['home']);
       }
+
     });
 
     this.channelsService.markAsReadMessages(this.channelIdentifer);
 
-
+    if(!this.isAllowed)
+      {
+        let cannelCommand : ChannelCommand = {
+          channelIdentifier: this.channelIdentifer,
+          commandType: ChannelCommandType.OPEN_CHANNEL,
+          typeCommand: "logIn",
+          sender: this.channelIdentifer,
+          senderIdentifier: this.channelIdentifer,
+          text: "",
+          id: this.channelIdentifer,
+          date: new Date()
+        }
+       // send message to all potentional listeneers
+        this.channelsService.sendCommand(cannelCommand);
+      }
+      this.isAllowed = true;
 
   }
 
@@ -75,12 +115,13 @@ this.activatedRoute.params.subscribe(x => {
       var message = this.chatForm.value;
 
       var channelCommand: ChannelCommand = {
-        channelIdentifier:this.channelIdentifer,
+        channelIdentifier: this.channelIdentifer,
         sender: this.userName,
-        senderIdentifier: 'drysdgsdgsd',
+        senderIdentifier: this.channelsService.userID,
         commandType: ChannelCommandType.MESSAGE,
+        typeCommand: 'message',
          text: message.userMessage,
-         id: '1',
+         id: this.channelsService.userID,
          date: new Date()
       };
 
@@ -94,14 +135,32 @@ this.activatedRoute.params.subscribe(x => {
     var channelCommand: ChannelCommand = {
       channelIdentifier:this.channelIdentifer,
       sender: this.userName,
-      senderIdentifier: 'asfaw5aasfs',
+      senderIdentifier: this.channelsService.userID,
       commandType: ChannelCommandType.CLOSE_CHANNEL,
+      typeCommand: 'getOut',
        text: "",
-       id: '1',
+       id: this.channelIdentifer,
        date: new Date()
     };
     await this.channelsService.sendCommand(channelCommand);
     this.router.navigate(['home']);
+  }
+
+
+  playAudio(url){
+    let audio = new Audio();
+    audio.src = url;
+    audio.load();
+    audio.play();
+  }
+  speakNow(){
+    let data = {
+      text: this.textSpeak,
+      voice: this.selectedVoice
+    }
+    this.api.speak(data).subscribe((result:any) => {
+      this.playAudio(result.url);
+    });
   }
 
 

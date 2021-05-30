@@ -8,6 +8,9 @@ import { SharedModule } from './shared/shared.module';
 import { PubNubAngular } from 'pubnub-angular2';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -19,9 +22,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    HttpClientModule,
     CoreModule,
     SharedModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig, 'mytestapp')
   ],
   providers: [PubNubAngular],
   bootstrap: [AppComponent]
