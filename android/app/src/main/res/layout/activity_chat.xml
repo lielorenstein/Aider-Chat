@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.ChatActivity">
+
+    <data>
+        <variable
+            name="fontSize"
+            type="com.example.aider_helper.utils.FontSizeUtils" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="24dp"
+        android:orientation="horizontal"
+        android:background="@color/white">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview_chat"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/IdFontSizeButtons"
+                android:layout_alignParentTop="true"
+                tools:listitem="@layout/recyclerview_message"
+                />
+
+            <LinearLayout
+                android:id="@+id/IdFontSizeButtons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_above="@id/entry_layout_text">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onFontIncrease"
+                    android:backgroundTint="#BFBFBF"
+                    android:text="+"
+                    android:textSize="30sp"/>
+                <Button
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onFontDecrease"
+                    android:backgroundTint="#BFBFBF"
+                    android:text="-"
+                    android:textSize="30sp"/>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/notification_number_unread_bubble"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/scroll_down_button"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/shape_bg_bubble"
+                android:paddingStart="@dimen/padding_10"
+                android:paddingEnd="@dimen/padding_10"
+                android:text="1"
+                android:textColor="#FFFFFF"
+
+                android:textSize="23sp" />
+
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/scroll_down_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/entry_layout_text"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                app:backgroundTint="@color/white"
+                app:srcCompat="@drawable/ic_baseline_expand_more_24"
+                tools:ignore="VectorDrawableCompat"
+                android:onClick="onScrollDownClick"/>
+            <LinearLayout
+                android:id="@+id/entry_layout_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true">
+
+                <EditText
+                    android:id="@+id/entry_new_text"
+                    android:layout_width="match_parent"
+                    android:layout_weight="10"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:ems="10"
+                    android:hint="text here"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:text="Mostly Harmless."
+                    android:textSize="14sp"
+                    tools:ignore="HardcodedText" />
+
+                <Button
+                    android:id="@+id/send_button"
+                    android:layout_width="@android:dimen/app_icon_size"
+                    android:layout_height="@android:dimen/app_icon_size"
+                    android:onClick="onClick"
+
+                    android:background="@drawable/ic_baseline_send_24" />
+            </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/LayoutNotifier"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:background="@drawable/bg_110"
+                android:onClick="LayoutOnClick">
+                <TextView
+                    android:id="@+id/textNotifier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="40sp"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:text="Please wait for another host"
+                    />
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+
+</layout>
